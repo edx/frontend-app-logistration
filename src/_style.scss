@@ -13,6 +13,45 @@ $microsoft-black: #2f2f2f;
 $microsoft-focus-black: #000;
 $apple-black: #000000;
 $apple-focus-black: $apple-black;
+$accent-a-light: #c9f2f5;
+
+.main-content {
+  @extend .pt-4;
+  min-width: 464px !important;
+}
+
+.stateful-button-width {
+  width: 12rem;
+}
+
+.login-button-width {
+  width: 6rem;
+}
+
+.tpa-skeleton {
+  margin-bottom: 0.75rem;
+}
+
+.nav-tabs {
+  a {
+    color: $primary !important;
+
+    :hover {
+      color: $primary !important;
+    }
+  }
+
+  .nav-link.active {
+    border-bottom: 0.175rem solid $primary;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  :hover {
+    border: none;
+  }
+}
 
 .sr-only {
   position: absolute;
@@ -21,6 +60,11 @@ $apple-focus-black: $apple-black;
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+.close {
+  padding-bottom: 0px !important;
+  padding-top: 3px !important;
 }
 
 .focus-out {
@@ -57,13 +101,12 @@ $apple-focus-black: $apple-black;
 }
 
 .form-control {
-  width: 500px;
+  background-color: white !important;
 }
 
 .btn-social {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
 
   margin-bottom: 1rem;
@@ -71,7 +114,7 @@ $apple-focus-black: $apple-black;
 
   background-color: $white;
   border: 1px solid $font-blue;
-  width: 242px;
+  width: 224px;
   height: 36px;
   color: $font-blue;
 
@@ -87,21 +130,14 @@ $apple-focus-black: $apple-black;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding-left: 20px;
+  padding-left: 1rem;
+  width: 14rem;
 
   .icon-image {
     background-color: transparent;
     max-height: 24px;
     max-width: 24px;
   }
-}
-
-.tpa-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-
-  margin: 0 !important;
 }
 
 .font-container {
@@ -208,42 +244,21 @@ $apple-focus-black: $apple-black;
   }
 }
 
-.field-link {
-  font-weight: normal;
-  display: block;
-  color: $primary;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  border: none;
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
-  text-transform: initial;
-  letter-spacing: normal;
-  text-decoration: none;
-  text-shadow: none;
+.institute-icon {
+  @extend .mr-1;
+  @extend .text-gray;
 
-  &:focus,
-  &:hover {
-    color: $primary;
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+
+  svg {
+    display: inline-block;
   }
 }
 
 .login-help {
   padding-left: 14px;
-}
-
-.opt-inline-field {
-  display: inline-block;
-  width: 50%;
-
-  .form-control {
-    width: 100%;
-  }
-}
-
-.opt-year-field {
-  padding-left: 15px;
 }
 
 .invalid-feedback {
@@ -258,6 +273,10 @@ $apple-focus-black: $apple-black;
   margin-left: -5px;
 }
 
+select.form-control {
+  background: none !important;
+}
+
 #honor-code p {
   margin: 0;
   padding: 0;
@@ -265,6 +284,10 @@ $apple-focus-black: $apple-black;
 
 #honor-code a span {
   @extend .sr-only;
+}
+
+.font-weight-500 {
+  font-weight: 500 !important;
 }
 
 .mw-420 {
@@ -287,14 +310,51 @@ $apple-focus-black: $apple-black;
   margin-top: 10px;
 }
 
+.mt-7 {
+  margin-top: 7rem;
+}
+
 .pt-10 {
   padding-top: 10px;
 }
+.tooltip-shadow {
+  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.3) !important;
+}
+#password-requirement-left {
+  opacity: 1;
+  .tooltip-inner {
+    @extend .tooltip-shadow;
+    background: white;
+    display: block;
+    color: #707070;
+  }
+  .arrow::before {
+    border-left-color: #fff;
+    @extend .tooltip-shadow;
+  }
+    
+}
 
-@media (min-width: 576px) {
-  .reset-password-container {
-    width: 420px;
-    max-width: 420px;
+#password-requirement-top {
+  opacity: 1;
+  width: 90%;
+  margin-bottom: 10px;
+  .tooltip-inner {
+    max-width: inherit;
+    background: white;
+    display: block;
+    @extend .tooltip-shadow;
+    color: #707070;
+  }
+  .arrow::before {
+    border-top-color: #fff;
+    @extend .tooltip-shadow;
+  }
+    
+}
+#forgotpassword-success-alert {
+  .alert-link {
+    color: #454545 !important;
   }
 }
 
@@ -305,20 +365,23 @@ $apple-focus-black: $apple-black;
 }
 
 @media (max-width: 600px) {
-  .btn-social {
-    width: 47%;
-    margin-bottom: 0.75rem;
-  }
-
-  .tpa-container {
-    justify-content: center;
-  }
   .form-control {
     width: 100%;
   }
 }
 
-@media (max-width: 450px) {
+@media (min-width: 463px) {
+  .reset-password-container {
+    width: 420px;
+    max-width: 420px;
+  }
+
+  .tpa-skeleton {
+    min-width: 464px !important;
+  }
+}
+
+@media (max-width: 464px) {
   .section-heading-line {
     position: relative;
     text-align: center;
@@ -328,8 +391,224 @@ $apple-focus-black: $apple-black;
       width: 10%;
     }
   }
+
+  .btn-social {
+    min-width: 100%;
+    margin-bottom: 0.75rem;
+    margin-right: 0 !important;
+  }
+
+  .main-content {
+    min-width: 100vw !important;
+    padding: 1.5rem !important;
+  }
 }
 
-.custom-select-size {
-  background-size: 8px 10px;
+.large-screen-container {
+  background-color: $white;
+  width: 50vw;
+}
+
+.medium-screen-container {
+  flex-wrap: nowrap;
+  max-width: inherit;
+}
+
+.screen-header {
+  background-color: $primary;
+}
+
+.screen-polygon {
+  background-color: $white;
+}
+
+.medium-screen-svg {
+  fill: $primary;
+  overflow: inherit;
+  position: absolute;
+}
+
+.large-screen-svg {
+  fill: $primary;
+  overflow: hidden;
+  position: absolute;
+}
+
+.small-screen-header {
+  width: 100vw;
+}
+
+.large-screen-top-stripe {
+  height: 0.5rem;
+  background-image: linear-gradient(
+    102.02deg,
+    $brand-700 10%,
+    $brand 10%,
+    $brand 45%,
+    $primary-700 45%,
+    $primary-700 55%,
+    $accent-a 55%,
+    $accent-a 75%,
+    $accent-a-light 75%,
+  );
+  background-repeat: no-repeat;
+}
+
+.medium-screen-top-stripe {
+  height: 0.5rem;
+  background-image: linear-gradient(
+    102.02deg,
+    $brand-700,
+    $brand-700 10%,
+    $brand 10%,
+    $brand 90%,
+    $primary-700 90%,
+    $primary-700 100%,
+  );
+  background-repeat: no-repeat;
+}
+
+.medium-large-screen-top-stripe {
+  height: 0.5rem;
+  background-image: linear-gradient(
+  102.02deg,
+  $brand-700 10%,
+  $brand 10%,
+  $brand 65%,
+  $primary-700 65%,
+  $primary-700 75%,
+  $accent-a 75%,
+  $accent-a 75%);
+  background-repeat: no-repeat;
+}
+
+.small-screen-top-stripe {
+  height: 0.5rem;
+  background-image: linear-gradient(
+    102.02deg,
+    $brand-700,
+    $brand-700 20%,
+    $brand 20%,
+  );
+  background-repeat: no-repeat;
+}
+
+.large-screen-svg-line {
+  padding-top: 0.5rem;
+  stroke: $accent-b;
+  stroke-width: 0.5rem;
+  width: 5.5rem;
+  height: 240px;
+}
+
+.medium-screen-svg-line {
+  padding-top: 0.5rem;
+  stroke: $accent-b;
+  stroke-width: 0.5rem;
+  width: 7em;
+  height: 240px;
+}
+
+.small-screen-svg-line {
+  padding-top: 0.5rem;
+  stroke: $accent-b;
+  stroke-width: 0.25rem;
+  width: 4em;
+  height: 72px;
+}
+
+.large-heading {
+  margin-left: 7px;
+  color: $white;
+  max-width: 24rem;
+  line-height: 78px;
+  font-size: 78px;
+}
+
+.medium-heading {
+  padding-left: 1rem;
+  color: $white;
+  max-width: 24rem;
+  line-height: 78px;
+  font-size: 78px;
+}
+
+.small-heading {
+  padding-left: 0.5rem;
+  color: $white;
+  line-height: 40px;
+  font-size: 36px;
+}
+
+.logo {
+  width: 4.44rem;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.username-suggestion {
+  padding: 0.15rem 0.5rem;
+  margin: 0.25rem;
+  border-radius: 0.5rem;
+  line-height: 2rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.username-suggestion-label {
+  font-size: 0.875rem;
+  margin-right: 0.25rem;
+}
+
+.yellow-border {
+  border: 2px solid #F0CC00;
+}
+
+.one-rem-font {
+  font-size: 0.99rem;
+}
+
+@media (max-width: 767px) {
+  .layout {
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .layout {
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .layout{
+    display: flex;
+    justify-content: space-between;
+
+  }
+  .content {
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+  }
+}
+
+.institute-heading {
+  color: $primary-700;
+}
+
+.logistration-button {
+  color: $gray-700;
+}
+
+.logistration-button:hover{
+  color: $gray-700;
+  text-decoration: none;
 }

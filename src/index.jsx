@@ -11,34 +11,32 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { messages as headerMessages } from '@edx/frontend-component-header';
 
+import {
+  BaseComponent, UnAuthOnlyRoute, registerIcons, NotFoundPage, Logistration,
+} from './common-components';
 import configureStore from './data/configureStore';
-import { RegistrationPage } from './register';
-import { LoginPage } from './login';
 import {
   LOGIN_PAGE, PAGE_NOT_FOUND, REGISTER_PAGE, RESET_PAGE, PASSWORD_RESET_CONFIRM, WELCOME_PAGE,
 } from './data/constants';
+import appMessages from './i18n';
+import './index.scss';
+
 import ForgotPasswordPage from './forgot-password';
-import {
-  HeaderLayout, UnAuthOnlyRoute, registerIcons, NotFoundPage,
-} from './common-components';
 import ResetPasswordPage from './reset-password';
 import WelcomePage from './welcome';
-import appMessages from './i18n';
-
-import './index.scss';
 
 registerIcons();
 
 subscribe(APP_READY, () => {
   ReactDOM.render(
     <AppProvider store={configureStore()}>
-      <HeaderLayout>
+      <BaseComponent>
         <Switch>
           <Route exact path="/">
-            <Redirect to={PAGE_NOT_FOUND} />
+            <Redirect to={REGISTER_PAGE} />
           </Route>
-          <UnAuthOnlyRoute exact path={LOGIN_PAGE} component={LoginPage} />
-          <UnAuthOnlyRoute exact path={REGISTER_PAGE} component={RegistrationPage} />
+          <UnAuthOnlyRoute exact path={LOGIN_PAGE} render={() => <Logistration selectedPage={LOGIN_PAGE} />} />
+          <UnAuthOnlyRoute exact path={REGISTER_PAGE} component={Logistration} />
           <UnAuthOnlyRoute exact path={RESET_PAGE} component={ForgotPasswordPage} />
           <Route exact path={PASSWORD_RESET_CONFIRM} component={ResetPasswordPage} />
           <Route exact path={WELCOME_PAGE} component={WelcomePage} />
@@ -47,7 +45,7 @@ subscribe(APP_READY, () => {
             <Redirect to={PAGE_NOT_FOUND} />
           </Route>
         </Switch>
-      </HeaderLayout>
+      </BaseComponent>
     </AppProvider>,
     document.getElementById('root'),
   );
@@ -70,6 +68,8 @@ initialize({
         USER_SURVEY_COOKIE_NAME: process.env.USER_SURVEY_COOKIE_NAME || null,
         COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
         WELCOME_PAGE_SUPPORT_LINK: process.env.WELCOME_PAGE_SUPPORT_LINK || null,
+        DISABLE_ENTERPRISE_LOGIN: process.env.DISABLE_ENTERPRISE_LOGIN || '',
+        INFO_EMAIL: process.env.INFO_EMAIL || '',
       });
     },
   },
