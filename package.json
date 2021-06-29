@@ -45,7 +45,7 @@
     "@fortawesome/free-solid-svg-icons": "5.15.1",
     "@fortawesome/react-fontawesome": "0.1.13",
     "classnames": "2.2.6",
-    "core-js": "3.9.1",
+    "core-js": "3.15.2",
     "extract-react-intl-messages": "4.1.1",
     "form-urlencoded": "4.2.1",
     "formik": "2.2.6",
