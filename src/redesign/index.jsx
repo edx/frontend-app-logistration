@@ -1,10 +1,11 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { AppProvider } from '@edx/frontend-platform/react';
+import { AppProvider, AuthenticatedPageRoute } from '@edx/frontend-platform/react';
 
+import BaseComponent from './base-component';
 import {
-  BaseComponent, UnAuthOnlyRoute, registerIcons, NotFoundPage, Logistration,
+  UnAuthOnlyRoute, registerIcons, NotFoundPage, Logistration,
 } from './common-components';
 import {
   LOGIN_PAGE, PAGE_NOT_FOUND, REGISTER_PAGE, RESET_PAGE, PASSWORD_RESET_CONFIRM, WELCOME_PAGE,
@@ -29,7 +30,7 @@ const RedesignApp = () => (
         <UnAuthOnlyRoute exact path={REGISTER_PAGE} component={Logistration} />
         <UnAuthOnlyRoute exact path={RESET_PAGE} component={ForgotPasswordPage} />
         <Route exact path={PASSWORD_RESET_CONFIRM} component={ResetPasswordPage} />
-        <Route exact path={WELCOME_PAGE} component={WelcomePage} />
+        <AuthenticatedPageRoute exact path={WELCOME_PAGE} component={WelcomePage} />
         <Route path={PAGE_NOT_FOUND} component={NotFoundPage} />
         <Route path="*">
           <Redirect to={PAGE_NOT_FOUND} />

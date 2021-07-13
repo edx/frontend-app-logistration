@@ -373,7 +373,9 @@ exports[`LoginPage should match forget password alert message snapshot 1`] = `
         id="confirmation-alert"
         role="alert"
       >
-        <div>
+        <div
+          className="alert-message-content"
+        >
           <div
             className="alert-heading h4"
           >
@@ -752,7 +754,9 @@ exports[`LoginPage should show error message 1`] = `
         id="login-failure-alert"
         role="alert"
       >
-        <div>
+        <div
+          className="alert-message-content"
+        >
           <div
             className="alert-heading h4"
           >
