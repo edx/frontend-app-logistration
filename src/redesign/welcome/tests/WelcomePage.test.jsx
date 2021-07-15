@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
@@ -21,6 +22,9 @@ jest.mock('@edx/frontend-platform/analytics');
 analytics.sendTrackEvent = jest.fn();
 analytics.sendPageEvent = jest.fn();
 auth.configure = jest.fn();
+
+auth.ensureAuthenticatedUser = jest.fn().mockImplementation(() => Promise.resolve((true)));
+auth.hydrateAuthenticatedUser = jest.fn().mockImplementation(() => Promise.resolve((true)));
 
 describe('WelcomePageTests', () => {
   mergeConfig({
@@ -48,7 +52,7 @@ describe('WelcomePageTests', () => {
     auth.getAuthenticatedUser = jest.fn(() => ({ userId: 3, username: 'edX' }));
   });
 
-  it('should submit user profile details on form submission', () => {
+  it('should submit user profile details on form submission', async () => {
     const formPayload = {
       year_of_birth: 1997,
       level_of_education: 'other',
@@ -57,6 +61,11 @@ describe('WelcomePageTests', () => {
 
     store.dispatch = jest.fn(store.dispatch);
     const welcomePage = mount(reduxWrapper(<IntlWelcomePage {...props} />));
+    await act(async () => {
+      await Promise.resolve(welcomePage);
+      await new Promise(resolve => setImmediate(resolve));
+      welcomePage.update();
+    });
 
     welcomePage.find('select#gender').simulate('change', { target: { value: 'm', name: 'gender' } });
     welcomePage.find('select#yearOfBirth').simulate('change', { target: { value: 1997, name: 'yearOfBirth' } });
@@ -66,20 +75,30 @@ describe('WelcomePageTests', () => {
     expect(store.dispatch).toHaveBeenCalledWith(saveUserProfile('edX', formPayload));
   });
 
-  it('should open modal on pressing skip for now button', () => {
+  it('should open modal on pressing skip for now button', async () => {
     const welcomePage = mount(reduxWrapper(<IntlWelcomePage {...props} />));
+    await act(async () => {
+      await Promise.resolve(welcomePage);
+      await new Promise(resolve => setImmediate(resolve));
+      welcomePage.update();
+    });
 
     welcomePage.find('button.btn-link').simulate('click');
     expect(welcomePage.find('.pgn__modal-content-container').exists()).toBeTruthy();
   });
 
-  it('should show error message when patch request fails', () => {
+  it('should show error message when patch request fails', async () => {
     store = mockStore({
       welcomePage: {
         showError: true,
       },
     });
     const welcomePage = mount(reduxWrapper(<IntlWelcomePage {...props} />));
+    await act(async () => {
+      await Promise.resolve(welcomePage);
+      await new Promise(resolve => setImmediate(resolve));
+      welcomePage.update();
+    });
     expect(welcomePage.find('#welcome-page-errors').exists()).toBeTruthy();
   });
 });

@@ -9,6 +9,8 @@ import { sendPageEvent } from '@edx/frontend-platform/analytics';
 import {
   configure as configureAuth,
   AxiosJwtAuthService,
+  ensureAuthenticatedUser,
+  hydrateAuthenticatedUser,
   getAuthenticatedUser,
 } from '@edx/frontend-platform/auth';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
@@ -34,6 +36,7 @@ import WelcomePageModal from './WelcomePageModal';
 const WelcomePage = (props) => {
   const { intl, submitState, showError } = props;
 
+  const [ready, setReady] = useState(false);
   const [registrationResult, setRegistrationResult] = useState({ redirectUrl: '' });
   const [values, setValues] = useState({ levelOfEducation: '', yearOfBirth: '', gender: '' });
   const [openDialog, setOpenDialog] = useState(false);
@@ -42,6 +45,11 @@ const WelcomePage = (props) => {
 
   useEffect(() => {
     configureAuth(AxiosJwtAuthService, { loggingService: getLoggingService, config: getConfig() });
+    ensureAuthenticatedUser(DASHBOARD_URL).then(() => {
+      hydrateAuthenticatedUser().then(() => {
+        setReady(true);
+      });
+    });
 
     if (props.location.state && props.location.state.registrationResult) {
       setRegistrationResult(props.location.state.registrationResult);
@@ -51,6 +59,10 @@ const WelcomePage = (props) => {
 
   if (!props.location.state || !props.location.state.registrationResult) {
     global.location.assign(DASHBOARD_URL);
+    return null;
+  }
+
+  if (!ready) {
     return null;
   }
 
