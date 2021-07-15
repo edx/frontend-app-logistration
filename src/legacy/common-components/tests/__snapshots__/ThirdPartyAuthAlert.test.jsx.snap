@@ -6,7 +6,9 @@ exports[`ThirdPartyAuthAlert should match login page third party auth alert mess
   id="tpa-alert"
   role="alert"
 >
-  <div>
+  <div
+    className="alert-message-content"
+  >
     <span>
       You have successfully signed into Google, but your Google account does not have a linked edX account. To link your accounts, sign in now using your edX password.
     </span>
@@ -20,7 +22,9 @@ exports[`ThirdPartyAuthAlert should match register page third party auth alert m
   id="tpa-alert"
   role="alert"
 >
-  <div>
+  <div
+    className="alert-message-content"
+  >
     <span>
       You've successfully signed into Google. We just need a little more information before you start learning with edX.
     </span>
