@@ -17,7 +17,7 @@ const LargeLayout = () => (
       <svg
         width="100%"
         height="100%"
-        className="m1-n1 large-screen-svg-primary"
+        className="ml-n1 large-screen-svg-primary"
         preserveAspectRatio="xMaxYMin meet"
       >
         <g transform="skewX(171.6)">

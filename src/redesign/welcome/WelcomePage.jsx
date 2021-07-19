@@ -127,7 +127,7 @@ const WelcomePage = (props) => {
         <div className="welcome-page-heading">
           <h2 className="h3 text-primary">{intl.formatMessage(messages['progressive.profiling.page.heading'])}</h2>
         </div>
-        <hr className="border-light-700" />
+        <hr className="border-light-700 mb-4" />
         {showError ? (
           <Alert id="welcome-page-errors" className="mb-3" variant="danger" icon={Error}>
             <Alert.Heading>{intl.formatMessage(messages['welcome.page.error.heading'])}</Alert.Heading>
@@ -160,7 +160,7 @@ const WelcomePage = (props) => {
               {getOptions('yearOfBirth')}
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="gender">
+          <Form.Group controlId="gender" className="mb-3">
             <Form.Control
               as="select"
               name="gender"

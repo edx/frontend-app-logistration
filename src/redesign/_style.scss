@@ -15,9 +15,12 @@ $apple-black: #000000;
 $apple-focus-black: $apple-black;
 $accent-a-light: #c9f2f5;
 
-.welcome-page-content,
 .main-content {
   @extend .pt-4;
+  min-width: 464px !important;
+}
+
+.welcome-page-content {
   min-width: 464px !important;
 }
 

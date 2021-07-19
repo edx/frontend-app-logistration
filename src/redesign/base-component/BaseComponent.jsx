@@ -65,7 +65,7 @@ const BaseComponent = ({ children }) => {
           {authenticatedUser ? <AuthExtraLargeLayout variant="xxl" username={authenticatedUser.username} /> : <LargeLayout />}
         </ExtraExtraLarge>
 
-        <div className={classNames('content', { 'align-items-center': authenticatedUser })}>
+        <div className={classNames('content', { 'align-items-center mt-0': authenticatedUser })}>
           {children}
         </div>
       </div>
