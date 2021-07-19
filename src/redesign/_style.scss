@@ -695,6 +695,10 @@ select.form-control {
 
 
 @media (max-width: 767px) {
+  .welcome-page-content {
+    padding-top: 1.5rem !important;
+  }
+
   .layout {
     display: flex;
     align-items: center;
